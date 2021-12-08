@@ -19,7 +19,7 @@ function App() {
           Learn React
         </a>
         <Greeting firstName="Oscar" lastName="Ruiz"/>
-        <Calculator a="PERRO" b="6" op="mul"/>
+        <Calculator a="{5}" b={6} op="resta"/>
       </header>
     </div>
   );
