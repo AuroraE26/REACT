@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-
+import Greeting from "./components/Greeting.js"
+import Calculator from "./components/Calculator.js"
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,8 @@ function App() {
         >
           Learn React
         </a>
+        <Greeting firstName="Oscar" lastName="Ruiz"/>
+        <Calculator a="PERRO" b="6" op="mul"/>
       </header>
     </div>
   );
