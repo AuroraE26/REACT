@@ -2,7 +2,7 @@ import React from "react"
       
 
 function Calculator({a,b,op}) {
-if(!Number.isInteger(a)||!Number.isInteger(a)){
+if(!Number.isInteger(a)||!Number.isInteger(b)){
     return(
         <div>
             <spa> Invalid number </spa>
