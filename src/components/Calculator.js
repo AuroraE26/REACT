@@ -10,17 +10,29 @@ const suma= parseInt(a)+parseInt(b);
     let intB=typeof parseInt(b);
     let res=0
  
-        if(!(intA,intB="number")){
+
+    if(!(intA,intB="number")){
         res="Datos Erroneos"
     } 
-    if({op}="suma"){res = resta;}
-    if({op}="resta"){res = resta;}
-    if({op}="mul"){res = mul;}
+
  
     // if(!({op}="suma")){
     //     res="Operador Erroneo"
     // }  
 
+    switch (op) {
+        case "suma":
+            res = suma;
+            break;
+        case "resta":
+            res = resta;
+            break;
+        case "mul":
+            res = mul;
+            break;
+        default:
+            break;
+    }
 
     return(
         <div>{res}</div>
