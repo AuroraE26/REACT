@@ -1,40 +1,62 @@
-import React, { useEffect, useState } from "react";
-//Styles
-import "./NavBar.css"
+import React, { useState } from "react";
+import {_users} from "./users.js";
+import "./NavBar.css";
+
+function NavBar() {
+	const newUser=_users.map((user) => (
+		<div key={user.id}>
+			<h1>
+				{user.firstName} {user.lastName}
+			</h1>
+		</div>
+	))
+	
+
+	const [active, setActive] = useState(3);
+	const handleClick = (itemID) => {
+		setActive(itemID);
+	};
+	const checkActive = (itemID) => (active === itemID ? "li-active" : "");
 
 
-export default function NavBar() {
-    const [itemOn1, setItemOn1] = useState(false);
-    const [itemOn2, setItemOn2] = useState(false);
-    const [itemOn3, setItemOn3] = useState(false);
+	let content = "";
+	switch (active) {
+		case 1:
+			content = newUser[active-1];
+			break;
+		case 2:
+			content = newUser[active-1];
+			break;
+		case 3:
+			content = newUser[active-1];
+			break;
+		default:
+			content = newUser[active-1];
+			break;
+	}
 
-    
-    let colorItem1 = (itemOn1===true) ? "color1" : "color2";
-    let colorItem2 = (itemOn2===true) ? "color1" : "color2";
-    let colorItem3 = (itemOn3===true) ? "color1" : "color2";
-    
-    
-    
-    
 	return (
 		<div>
 			<ul>
-				<li className={colorItem1} onClick={()=> 
-                    ((setItemOn1(itemOn1 => !itemOn1)) & 
-                    (setItemOn2(itemOn2  => false)) &
-                    (setItemOn3(itemOn3  => false)))}>Item 1</li>
-
-                    
-                    <li className={colorItem2} onClick={()=> 
-                    ((setItemOn2(itemOn2 => !itemOn2)) & 
-                    (setItemOn1(itemOn1  => false)) &
-                    (setItemOn3(itemOn3  => false)))}>Item 2</li>
-
-                    <li className={colorItem3} onClick={()=> 
-                    ((setItemOn3(itemOn3 => !itemOn3)) & 
-                    (setItemOn1(itemOn1  => false)) &
-                    (setItemOn2(itemOn2  => false)))}>Item 3</li>                    
-            </ul>        
+				<li className={checkActive(1)} onClick={() => handleClick(1)}>
+					Item 1
+				</li>
+				<li className={checkActive(2)} onClick={() => handleClick(2)}>
+					Item 2
+				</li>
+				<li className={checkActive(3)} onClick={() => handleClick(3)}>
+					Item 3
+				</li>
+				<li className={checkActive(4)} onClick={() => handleClick(4)}>
+					Item 4
+				</li>
+			</ul>
+			<div>
+				<h1>{content}</h1>
+				
+			</div>
 		</div>
 	);
 }
+
+export default NavBar;
