@@ -1,4 +1,4 @@
-export const _users = [
+const _users = [
 	{
 		id: 1,
 		firstName: "Selene",
@@ -21,3 +21,10 @@ export const _users = [
 	},
 ];
 
+export const newUser=_users.map((user) => (
+	<div key={user.id}>
+		<h1>
+			{user.firstName} {user.lastName}
+		</h1>
+	</div>
+))

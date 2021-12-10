@@ -1,17 +1,8 @@
 import React, { useState } from "react";
-import {_users} from "./users.js";
+import {newUser} from "./users.js";
 import "./NavBar.css";
 
 function NavBar() {
-	const newUser=_users.map((user) => (
-		<div key={user.id}>
-			<h1>
-				{user.firstName} {user.lastName}
-			</h1>
-		</div>
-	))
-	
-
 	const [active, setActive] = useState(3);
 	const handleClick = (itemID) => {
 		setActive(itemID);
