@@ -1,35 +1,60 @@
-// import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 
 // Components
-import UserName from "./components/UserName/UserName";
+import Character from "./components/Character";
+
+// Services
+import { listCharacters } from "./services/characters";
 
 function App() {
-	const [users, setUsers] = useState([]);
-	useEffect(() => {
-		const getUsers = async () => {
-			const response = await fetch("https://rickandmortyapi.com/api/character");
-			const data= await response.json();
-			const parsedRes = data.results;
-			console.log(parsedRes);
-			setUsers(parsedRes);
-		};
+	const [characters, setCharacters] = useState([]);
+	const [data, setData] = useState({});
 
-		getUsers();
+	useEffect(() => {
+		const list = async () => {
+			const { results, info } = await listCharacters();
+			setCharacters(results);
+			setData(info);
+		};
+		list();
 	}, []);
 
-	const dataNew = users.map((user)=>(
-		<UserName id={user.id} name={user.name} status={user.status} species={user.species} lastLoc={user.location.name} origin={user.origin.name} image={user.image}/>
-	));
+	const handleClick = async (action) => {
+		if (action === "next" && data.next != null) {
+			const page = data.next.split("?")[1];
+			const { results, info } = await listCharacters(page);
+			setCharacters(results);
+			setData(info);
+		}else if(action === "prev" && data.prev != null){
+			const page = data.prev.split("?")[1];
+			const { results, info } = await listCharacters(page);
+			setCharacters(results);
+			setData(info);
+		}
+	};
+
+	console.log(data);
 
 	return (
 		<div className="App">
-			<header className="App-header">
-				{/* <img src={logo} className="App-logo" alt="logo" /> */}
-				{/* <NavBar /> */}
-				{dataNew}
-			</header>
+			<div className="fixed-container">
+				<button onClick={() => handleClick("prev")} className="btn">
+					Prev
+				</button>
+				<button onClick={() => handleClick("next")} className="btn">
+					Next
+				</button>
+			</div>
+			{characters.map(({ id, image, name, species, status }) => (
+				<Character
+					key={id}
+					image={image}
+					name={name}
+					species={species}
+					status={status}
+				/>
+			))}
 		</div>
 	);
 }
