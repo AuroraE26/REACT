@@ -11,7 +11,7 @@ ReactDOM.render(
 				<Route path="/" element={<App />} />
 			</Routes>
 		</BrowserRouter>
-	</React.StrictMode>,
+	</React.StrictMode>
 	document.getElementById("root")
 );
 reportWebVitals();
